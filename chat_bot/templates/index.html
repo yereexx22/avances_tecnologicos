@@ -1,54 +1,22 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Chatbot Amistoso</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot de Reglas</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
-  <header>
-    <h1> Chatbot Amistoso</h1>
-    <p>¡Hablemos! Estoy aquí para ayudarte.</p>
-  </header>
-
-  <main>
     <div id="chat-container">
-      <div id="chat-log"></div>
-      <form id="chat-form">
-        <input type="text" id="user-message" name="user_message" placeholder="Escribe tu mensaje..." required>
-        <button type="submit">Enviar</button>
-      </form>
+        <div id="chat-log">
+            <div class="message bot-message">¡Hola! Soy un chatbot. Escribe 'ayuda' para ver qué puedo hacer.</div>
+        </div>
+        <form id="user-input-form">
+            <input type="text" id="user-input" placeholder="Escribe tu mensaje..." autocomplete="off">
+            <button type="submit" id="send-btn">Enviar</button>
+        </form>
     </div>
-  </main>
 
-  <script>
-    const form = document.getElementById('chat-form');
-    const chatLog = document.getElementById('chat-log');
-
-    form.addEventListener('submit', function(e) {
-      e.preventDefault();
-      const userMessageInput = document.getElementById('user-message');
-      const userMessage = userMessageInput.value;
-
-      if (userMessage.trim() !== "") {
-        const userBubble = document.createElement('div');
-        userBubble.textContent = "Tú: " + userMessage;
-        chatLog.appendChild(userBubble);
-      }
-
-      fetch('/chat', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: 'user_message=' + encodeURIComponent(userMessage)
-      })
-      .then(response => response.json())
-      .then(data => {
-        const botBubble = document.createElement('div');
-        botBubble.textContent = "Bot: " + data.response;
-        chatLog.appendChild(botBubble);
-        userMessageInput.value = '';
-      });
-    });
-  </script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html>
