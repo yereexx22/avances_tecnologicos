@@ -17,3 +17,17 @@ def chatbot_responde(user_mensaje):
         return "si tu no sabes donde estas menos yo :C" 
     else:
         return "Lo siento, no entiendo tu mensaje. ¿Podrías reformularlo o hacerme otra pregunta?"
+
+@app.route('/')
+def index():
+    return render_template('index.html')
+
+
+@app.route('/chat', methods=['POST'])
+def get_responde():
+    user_message = request.form['user_message']
+    response = chatbot_responde(user_message)
+    return jsonify({'response': response})
+
+if __name__ == '__main__':
+    app.run(debug=True)
