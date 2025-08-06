@@ -1,32 +1,34 @@
-from flask import Flask,request,jsonify,render_template
+from flask import Flask, request, jsonify, render_template
 
 app = Flask(__name__)
-def chatbot_responde(user_mensaje):
-    user_mensaje = user_mensaje.lower().strip()
-    if"hola" in user_mensaje or "saludos" in user_mensaje:
-        return "Hola, ¿cómo puedo ayudarte hoy?"
-    elif "adiós" in user_mensaje or "chao" in user_mensaje:
-        return "¡Adiós! Que tengas un buen día."
-    elif "gracias" in user_mensaje or "gracias por tu ayuda" in user_mensaje:
-        return "¡De nada! Estoy aquí para ayudarte."
-    elif "cómo estás" in user_mensaje:
-        return "Estoy aquí para ayudarte. ¿En qué puedo asistirte hoy?"
-    elif "qué puedes hacer" in user_mensaje:
-        return "Puedo responder preguntas, proporcionar información y ayudarte con tareas simples. ¿En qué puedo ayudarte hoy?"
-    elif "ubicacion" in user_mensaje or "donde estoy" in user_mensaje:
-        return "si tu no sabes donde estas menos yo :C" 
-    else:
-        return "Lo siento, no entiendo tu mensaje. ¿Podrías reformularlo o hacerme otra pregunta?"
 
+def chatbot_response(user_message):
+    user_message = user_message.lower().strip()
+    if "hola" in user_message or "buenos dias" in user_message:
+        return "¡Hola! ¿Cómo puedo ayudarte hoy?"
+    elif "cómo estás" in user_message or "¿qué tal?" in user_message:
+        return "Estoy bien, gracias por preguntar. ¿Y tú?"
+    elif "adiós" in user_message or "hasta luego" in user_message:
+        return "¡Adiós! Que tengas un buen día."
+    elif "ayuda" in user_message:
+        return "Puedo responder a preguntas básicas. Intenta preguntar por 'horario', 'contacto' o 'ubicación'."
+    elif "horario" in user_message:
+        return "Nuestro horario de atención es de 9:00 a 18:00 de lunes a viernes."
+    elif "contacto" in user_message:
+        return "Puedes contactarnos en el 555-1234 o enviarnos un correo a info@ejemplo.com."
+    elif "ubicación" in user_message:
+        return "Estamos ubicados en la Calle 123."
+    else:
+        return "Lo siento, no entiendo tu pregunta. ¿Puedes reformularla?"
+    
 @app.route('/')
 def index():
     return render_template('index.html')
 
-
-@app.route('/chat', methods=['POST'])
-def get_responde():
-    user_mensaje = request.form['user_mensaje']
-    response = chatbot_responde(user_mensaje)
+@app.route('/get_response', methods=['POST'])
+def get_response():
+    user_message = request.json.get('message')
+    response = chatbot_response(user_message)
     return jsonify({'response': response})
 
 if __name__ == '__main__':
