@@ -13,7 +13,7 @@ def chatbot_responde(user_mensaje):
         return "Estoy aquí para ayudarte. ¿En qué puedo asistirte hoy?"
     elif "qué puedes hacer" in user_message:
         return "Puedo responder preguntas, proporcionar información y ayudarte con tareas simples. ¿En qué puedo ayudarte hoy?"
-     elif "ubicacion" in user_mensaje or "donde estoy" in user_mensaje:
+    elif "ubicacion" in user_mensaje or "donde estoy" in user_mensaje:
         return "si tu no sabes donde estas menos yo :C" 
-        else:
+    else:
         return "Lo siento, no entiendo tu mensaje. ¿Podrías reformularlo o hacerme otra pregunta?"
