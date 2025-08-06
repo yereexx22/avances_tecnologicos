@@ -1,46 +1,40 @@
-/* Style for the chat bot application */
 body {
-  font-family: 'Segoe UI', sans-serif;
-  background-color: #f4f4f4;
-  color: #333;
-  margin: 0;
-  padding: 0;
+    font-family: Arial, sans-serif;
 }
-
-header {
-  background-color: #4b6cb7;
-  color: white;
-  padding: 20px;
-  text-align: center;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+#chat-container {
+    width: 400px;
+    height: 500px;
+    border: 1px solid #ccc;
+    margin: 20px auto;
+    display: flex;
+    flex-direction: column;
 }
-
-nav {
-  background-color: #182848;
-  padding: 10px;
+#chat-log {
+    flex-grow: 1;
+    padding: 10px;
+    overflow-y: auto;
 }
-
-nav a {
-  color: white;
-  text-decoration: none;
-  margin: 0 10px;
-  font-weight: bold;
+#user-input-form {
+    display: flex;
+    padding: 10px;
+    border-top: 1px solid #ccc;
 }
-
-main {
-  padding: 20px;
+#user-input {
+    flex-grow: 1;
+    padding: 8px;
 }
-
-button {
-  background-color: #4b6cb7;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  margin-top: 10px;
-  border-radius: 5px;
-  cursor: pointer;
+#send-btn {
+    padding: 8px;
+    margin-left: 5px;
 }
-
-button:hover {
-  background-color: #3a56a5;
+.message {
+    margin-bottom: 10px;
+}
+.user-message {
+    text-align: right;
+    color: #007bff;
+}
+.bot-message {
+    text-align: left;
+    color: #333;
 }
