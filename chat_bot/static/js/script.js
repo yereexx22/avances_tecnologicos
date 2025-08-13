@@ -1,36 +1,62 @@
-document.getElementById('user-input-form').addEventListener('submit', function(event) {
-    event.preventDefault();
-    const userInput = document.getElementById('user-input');
-    const message = userInput.value.trim();
+document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('user-input-form');
+    const input = document.getElementById('user-input');
+    const chatLog = document.getElementById('chat-log');
 
-    if (message) {
-        // Mostrar el mensaje del usuario en el chat
-        appendMessage(message, 'user-message');
+    // Auto-focus al cargar
+    input.focus();
 
-        // Enviar el mensaje al servidor Flask
-        fetch('/get_response', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ message: message })
-        })
-        .then(response => response.json())
-        .then(data => {
-            // Mostrar la respuesta del bot en el chat
-            appendMessage(data.response, 'bot-message');
-        });
+    form.addEventListener('submit', async function(event) {
+        event.preventDefault();
+        const message = input.value.trim();
 
-        // Limpiar el campo de entrada
-        userInput.value = '';
+        if (message) {
+            appendMessage(message, 'user-message');
+
+            try {
+                const response = await fetch('/get_response', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ message })
+                });
+
+                const data = await response.json();
+
+                if (data.response) {
+                    appendMessage(data.response, 'bot-message');
+                } else {
+                    appendMessage('Lo siento, no entendí eso.', 'bot-message');
+                }
+            } catch (error) {
+                appendMessage('Error al conectar con el servidor.', 'bot-message');
+                console.error('Error:', error);
+            }
+
+            input.value = '';
+            input.focus();
+        }
+    });
+
+    function appendMessage(text, className) {
+        const messageDiv = document.createElement('div');
+        messageDiv.classList.add('message', className);
+        messageDiv.textContent = text;
+
+        // Animación de entrada
+        messageDiv.style.opacity = 0;
+        messageDiv.style.transform = 'translateY(10px)';
+        chatLog.appendChild(messageDiv);
+
+        // Forzar reflow para activar transición
+        void messageDiv.offsetWidth;
+
+        messageDiv.style.transition = 'all 0.3s ease';
+        messageDiv.style.opacity = 1;
+        messageDiv.style.transform = 'translateY(0)';
+
+        // Auto-scroll
+        chatLog.scrollTop = chatLog.scrollHeight;
     }
 });
-
-function appendMessage(message, className) {
-    const chatLog = document.getElementById('chat-log');
-    const messageDiv = document.createElement('div');
-    messageDiv.classList.add('message', className);
-    messageDiv.textContent = message;
-    chatLog.appendChild(messageDiv);
-    chatLog.scrollTop = chatLog.scrollHeight; // Auto-scroll
-}

@@ -6,9 +6,9 @@ def chatbot_response(user_message):
     user_message = user_message.lower().strip()
     if "hola" in user_message or "buenos dias" in user_message:
         return "¡Hola! ¿Cómo puedo ayudarte hoy?"
-    elif "cómo estás" in user_message or "¿qué tal?" in user_message:
+    elif "como estas" in user_message or "que tal" in user_message:
         return "Estoy bien, gracias por preguntar. ¿Y tú?"
-    elif "adiós" in user_message or "hasta luego" in user_message:
+    elif "adios" in user_message or "hasta luego" in user_message:
         return "¡Adiós! Que tengas un buen día."
     elif "ayuda" in user_message:
         return "Puedo responder a preguntas básicas. Intenta preguntar por 'horario', 'contacto' o 'ubicación'."

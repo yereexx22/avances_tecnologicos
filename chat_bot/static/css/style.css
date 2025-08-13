@@ -1,40 +1,84 @@
+/* 🟢 Fondo general */
 body {
-    font-family: Arial, sans-serif;
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #e5ddd5;
 }
+
+/* 💬 Contenedor del chat tipo WhatsApp */
 #chat-container {
-    width: 400px;
-    height: 500px;
-    border: 1px solid #ccc;
-    margin: 20px auto;
-    display: flex;
-    flex-direction: column;
+  max-width: 600px;
+  margin: 40px auto;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  height: 80vh;
+  overflow: hidden;
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
 }
+
+/* 📜 Área de mensajes */
 #chat-log {
-    flex-grow: 1;
-    padding: 10px;
-    overflow-y: auto;
+  flex: 1;
+  padding: 10px;
+  overflow-y: auto;
+  background-color: #dcf8c6;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
-#user-input-form {
-    display: flex;
-    padding: 10px;
-    border-top: 1px solid #ccc;
-}
-#user-input {
-    flex-grow: 1;
-    padding: 8px;
-}
-#send-btn {
-    padding: 8px;
-    margin-left: 5px;
-}
-.message {
-    margin-bottom: 10px;
-}
+
+/* 🧍‍♂️ Mensaje del usuario */
 .user-message {
-    text-align: right;
-    color: #007bff;
+  align-self: flex-end;
+  background-color: #d9fdd3;
+  padding: 8px 12px;
+  border-radius: 16px 0 16px 16px;
+  max-width: 75%;
+  font-size: 14px;
 }
+
+/* 🤖 Mensaje del bot */
 .bot-message {
-    text-align: left;
-    color: #333;
+  align-self: flex-start;
+  background-color: #ffffff;
+  padding: 8px 12px;
+  border-radius: 0 16px 16px 16px;
+  max-width: 75%;
+  font-size: 14px;
+  box-shadow: 0 1px 1px rgba(0,0,0,0.05);
 }
+
+/* 📝 Formulario de ingreso */
+#chat-form {
+  display: flex;
+  padding: 10px;
+  border-top: 1px solid #ddd;
+  background-color: #f0f0f0;
+}
+
+#chat-form input {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 20px;
+  font-size: 14px;
+  outline: none;
+}
+
+#chat-form button {
+  background-color: #075e54;
+  color: white;
+  border: none;
+  margin-left: 8px;
+  padding: 10px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+#chat-form button:hover {
+  background-color: #0a7c6a;
