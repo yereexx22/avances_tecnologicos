@@ -3,18 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chatbot Moderno</title>
+    <title>Gemini Style Chatbot</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
-    <div id="chat-container">
-        <div id="chat-log">
-            <div class="message bot-message">👋 ¡Hola! Soy tu asistente virtual. Escribe "ayuda" para ver qué puedo hacer.</div>
-        </div>
-        <form id="user-input-form">
-            <input type="text" id="user-input" placeholder="Escribe tu mensaje..." autocomplete="off">
-            <button type="submit" id="send-btn">Enviar</button>
-        </form>
+    <div class="chat-wrapper">
+        <header class="chat-header">
+            <h1>Gemini Chat</h1>
+            <p>Tu asistente inteligente</p>
+        </header>
+
+        <main id="chat-container">
+            <div id="chat-log">
+                <div class="message bot-message">
+                    <div class="bubble">
+                        👋 ¡Hola! Soy Gemini. ¿En qué puedo ayudarte hoy?
+                    </div>
+                </div>
+            </div>
+
+            <form id="user-input-form" autocomplete="off">
+                <input type="text" id="user-input" placeholder="Escribe tu mensaje..." />
+                <button type="submit" id="send-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" fill="#fff">
+                        <path d="M2 21 23 12 2 3v7l15 2-15 2Z"/>
+                    </svg>
+                </button>
+            </form>
+        </main>
     </div>
 
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
